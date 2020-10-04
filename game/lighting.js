@@ -1,4 +1,4 @@
-import {HemisphereLight, DirectionalLight, SpotLight} from 'three'
+import {DirectionalLight, SpotLight} from 'three'
 import {scene} from './index'
 
 export function setLighting() {

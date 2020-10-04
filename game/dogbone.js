@@ -1,6 +1,5 @@
 import { scene } from "."
-import {dog} from './dog'
-import {boneCollision} from './collisionLogic'
+
 
 
 

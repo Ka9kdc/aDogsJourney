@@ -1,15 +1,16 @@
-import { camera, theta } from '.'
+
 import {dog, dogMovement} from './dog'
 
 const scoreBoard = document.getElementById('score')
 let score = 0
-export let treeHit;
-//treeTrunks have a radius of .1
+export let iceBurgHit;
 
-export const treeCollision = (tree) => {
-    const xPosition = tree.position.x - dog.scene.position.x
-    const zPosition = tree.position.z - dog.scene.position.z
-    if(xPosition < .4 && xPosition > -.4 && zPosition < .4 && zPosition > -.4){
+//iceBurgTrunks have a radius of .1
+
+export const iceBurgCollision = (iceBurg) => {
+    const xPosition = iceBurg.position.x - dog.scene.position.x
+    const zPosition = iceBurg.position.z - dog.scene.position.z
+    if(xPosition < .8 && xPosition > -.8 && zPosition < .8 && zPosition > -.8){
        //colided
        dog.movement.isWalking= false
         dog.movement.isJumping= false
@@ -17,7 +18,7 @@ export const treeCollision = (tree) => {
         dog.movement.isTurningRight= false
         dog.movement.isTurningLeft= false
         dogMovement()
-        treeHit = tree
+        iceBurgHit = iceBurg
         score -= 10
         scoreBoard.innerText = score
    } 

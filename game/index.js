@@ -5,12 +5,12 @@ import {
     Clock,
     FogExp2, MathUtils
   } from 'three'
-  import {GLTFLoader} from 'three/examples/jsm/loaders/GLTFLoader.js'
-  import './eventListners'
+import {GLTFLoader} from 'three/examples/jsm/loaders/GLTFLoader.js'
+import './eventListners'
 import { makeGround } from './ground'
-  import {prepDog, dog, positionChange} from './dog'
+import {prepDog, dog, positionChange} from './dog'
 import { setLighting } from './lighting'
-import { makeWorldTrees} from './trees'
+import { makeWorldiceBurgs} from './iceBurg'
 import { makeBones} from './dogbone'
   
   //dog.scenehas 4 actions 1:jump, 2:walk; 3:walkslow 4: die
@@ -117,7 +117,7 @@ export const init = () => {
   setLighting()
  makeGround()
  loadModels()
- makeWorldTrees()
+ makeWorldiceBurgs()
   render()
 }
   
