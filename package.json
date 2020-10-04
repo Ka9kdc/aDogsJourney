@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "npx http-server ./public/index.html && npm run build",
+    "start": "node server",
+    "start-dev": "NODE_ENV='development' npm run build & NODE_ENV='development' npm run start-server",
+    "start-server": "nodemon server -e html,js,scss --ignore public --ignore client",
     "build": "webpack -w",
     "lint": "eslint ./ --ignore-path .gitignore",
     "lint-fix": "npm run lint -- --fix",
@@ -31,6 +33,7 @@
   "license": "ISC",
   "dependencies": {
     "drei": "^1.5.7",
+    "express": "^4.17.1",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-three-fiber": "^5.0.3",
