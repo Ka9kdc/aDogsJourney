@@ -1,5 +1,6 @@
 import { ConeGeometry, CylinderGeometry, Mesh, MeshStandardMaterial, Object3D } from 'three'
 import {scene} from './index'
+import {dog} from './dog'
 
 const worldTrees = []
 
@@ -54,10 +55,10 @@ export const makeWorldTrees = () =>{
             newTree.position.y = offset
         }
         if(worldTrees.length%2) {
-            newTree.position.x = offset*5
+            newTree.position.x = offset*10
             
         } else {
-            newTree.position.x = offset*-5
+            newTree.position.x = offset*-10
         }
         if(newTree.position.x > .5  || newTree.position.x < -.5){
             worldTrees.push(newTree)
@@ -76,6 +77,32 @@ const addMoreTrees = () =>{
         scene.add(newTree) 
     }
 }
+ const turning = ()=> {
+    if(dog.movement.isTurningRight){
+        worldTrees.forEach(tree => {
+            if(tree.position.z){
+                tree.position.x -= .01 
+            }else {
+              tree.position.x -= .001  
+            }
+            
+            if(tree.position.x > 10){
+                tree.position.x -= 25
+            }
+        })
+    }
+    else if(dog.movement.isTurningLeft){
+        worldTrees.forEach(tree => {
+            if(tree.position.z){
+                tree.position.x += .01 
+            }else {
+        tree.position.x += .001
+            }
+        if(tree.position.x < -10){
+            tree.position.x += 25
+        }
+    })}
+}
 
 export const moveTree = () => {
 
@@ -88,11 +115,12 @@ export const moveTree = () => {
     if(currentTree.position.z > 3){
         currentTree.position.z = 0
         currentTree.position.y = 1
+        console.log(currentTree.position.x)
     currentTree.position.x = Math.random() *10 -5
     }
     })
-    // worldTrees.filter(currentTree => currentTree.position.z === 0)
-    // console.log(worldTrees.length)
+    turning()
+ 
    
 }
 

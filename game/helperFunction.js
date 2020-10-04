@@ -66,12 +66,25 @@ export function checkKey(event) {
 
       break
     case 'ArrowRight':
-      dog.scene.rotation.y -= 1
-      dog.movement.isTurningRight = true
+      if(dog.scene.rotation.y !== Math.PI-1){
+        dog.scene.rotation.y -= 1
+      }
+      if(dog.movement.isTurningLeft){
+        dog.movement.isTurningLeft = false
+      } else {
+        dog.movement.isTurningRight = true
+      }
       break
     case 'ArrowLeft':
-      dog.scene.rotation.y += 1
-      dog.movement.isTurningLeft = true
+      if(dog.scene.rotation.y !== Math.PI+1){
+        dog.scene.rotation.y += 1
+      }
+      
+      if(dog.movement.isTurningRight){
+        dog.movement.isTurningRight = false
+      } else {
+        dog.movement.isTurningLeft = true
+      }
       break
     default:
       const mixerInfo = mixers[event.keyCode - 49]
@@ -84,7 +97,6 @@ export function checkKey(event) {
   }
   dogMovement()
 
-  
 }
 
 

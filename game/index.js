@@ -14,7 +14,7 @@ import {
   import {GLTFLoader} from 'three/examples/jsm/loaders/GLTFLoader.js'
   import './eventListners'
 import { makeGround } from './ground'
-  import {prepDog, dog} from './dog'
+  import {prepDog, dog, moveDog} from './dog'
 import { setLighting } from './lighting'
 import { makeWorldTrees, moveTree } from './trees'
   
@@ -58,11 +58,17 @@ import { makeWorldTrees, moveTree } from './trees'
       console.error(error)
     }
   )
- 
+
   const render = () => {
     requestAnimationFrame(render)
-    if(dog && dog.movement.isWalking){
-      moveTree()
+    if(dog){
+      if(dog.movement.isWalking){
+        moveTree()
+      } else if(dog.movement.isJumping){
+        moveTree()
+        moveDog()
+      }
+      
     }
   
     const dt = clock.getDelta()

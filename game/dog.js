@@ -1,7 +1,8 @@
 import {mixers, scene} from './index'
 import {AnimationMixer, LoopOnce} from 'three'
-import { addMixerListeners } from './eventListners';
 
+
+let counter = 0
 export let dog; 
 export function prepDog(gltf) {
    dog = gltf
@@ -55,9 +56,11 @@ export const dogMovement = () => {
     mixers[0].actions[4].enabled = true
   } else if(actions.isJumping){
     mixers[0].actions[2].enabled = true
+    
     mixers[0].mixer.addEventListener( 'finished', function( e ) {
       if(actions.isWalking === 0) actions.isWalking = true
       actions.isJumping = false
+      dog.scene.position.y = 0
       dogMovement()
     } ); // properties of e: type, action and direction
   } else if(actions.hasDied){
@@ -74,3 +77,13 @@ export const dogMovement = () => {
   })
 }
 
+export const moveDog = () =>{
+  if(counter < 40){
+    dog.scene.position.y += .01
+  }else if (counter === 84) { //max height reached is y = .42
+    counter = -1
+  } else {
+    dog.scene.position.y -= .01
+  }
+  counter++
+}
