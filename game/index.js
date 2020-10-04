@@ -8,18 +8,18 @@ import {
   import {GLTFLoader} from 'three/examples/jsm/loaders/GLTFLoader.js'
   import './eventListners'
 import { makeGround } from './ground'
-  import {prepDog, dog, moveDog, dogMovement, positionChange} from './dog'
+  import {prepDog, dog, positionChange} from './dog'
 import { setLighting } from './lighting'
-import { makeWorldTrees, moveTree } from './trees'
-import { makeBones, moveBones } from './dogbone'
-import { changeToZPosition, changeToXPosition } from './helperFunction'
+import { makeWorldTrees} from './trees'
+import { makeBones} from './dogbone'
   
   //dog.scenehas 4 actions 1:jump, 2:walk; 3:walkslow 4: die
   
   
 
-  export const scene = new Scene()
-  scene.fog = new FogExp2(0xf0fff0, 0.14)
+  export let scene;
+
+
   export const camera = new PerspectiveCamera(
     75,
     window.innerWidth / window.innerHeight,
@@ -34,14 +34,13 @@ import { changeToZPosition, changeToXPosition } from './helperFunction'
   export const renderer = new WebGLRenderer({antialias: true, alpha: true})
   renderer.setClearColor(0xfffafa, 1)
   renderer.setSize(window.innerWidth, window.innerHeight)
-  document.getElementById('app').appendChild(renderer.domElement)
-  
   
 
   
   export const mixers = []
   const loader = new GLTFLoader()
-  loader.load(
+  const loadModels =() => {
+    loader.load(
     '/Pug.gltf',
     function (gltf) {
       prepDog(gltf)      
@@ -58,8 +57,10 @@ import { changeToZPosition, changeToXPosition } from './helperFunction'
  function (error) {
    console.error(error)
  })
+  }
+  
 
- let theta = 0
+ export let theta = 0
 
  const paning = () => {
    theta +=.1
@@ -70,9 +71,14 @@ import { changeToZPosition, changeToXPosition } from './helperFunction'
     } else {
       console.log(camera.position)
       camera.position.z = 5
-      dog.scene.rotation.y = Math.PI 
+      if(dog){
+         dog.scene.rotation.y = Math.PI 
+      }
+       
+      }
+      
     }
- }
+ 
 
   const render = () => {
     requestAnimationFrame(render)
@@ -90,10 +96,7 @@ if(dog){
   camera.lookAt(dog.scene.position)
  if(dog.movement.isWalking || dog.movement.isJumping){
    positionChange()
-
-  
- 
- }
+ } 
 
 }
    
@@ -108,10 +111,14 @@ if(dog){
   }
   
 export const init = () => {
+  scene = new Scene()
+  scene.fog = new FogExp2(0xf0fff0, 0.14)
+  document.getElementById('app').appendChild(renderer.domElement)
   setLighting()
  makeGround()
+ loadModels()
  makeWorldTrees()
   render()
 }
-  init()
+  
   

@@ -4,7 +4,7 @@ import {boneCollision} from './collisionLogic'
 
 
 
-const Allbones = []
+export const Allbones = []
 
 export const makeBones = (gltf) => {
     const dogbone = gltf.scene

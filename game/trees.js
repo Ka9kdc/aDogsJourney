@@ -1,9 +1,8 @@
 import { ConeGeometry, CylinderGeometry, Mesh, MeshStandardMaterial, Object3D } from 'three'
 import {scene} from './index'
-import {dog} from './dog'
-import { treeCollision } from './collisionLogic'
 
-const worldTrees = []
+
+export const worldTrees = []
 
 
 
@@ -47,9 +46,10 @@ export const makeWorldTrees = () =>{
         
         
             worldTrees.push(newTree)
-            scene.add(newTree) 
+            
         
     }
+    worldTrees.forEach(tree => scene.add(tree) )
 }
 
 // export const addMoreTrees = () =>{

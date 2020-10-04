@@ -9,8 +9,8 @@ window.addEventListener('resize', () => {
 
 window.addEventListener('keydown', checkKey)
 // window.addEventListener('click', onMouseClick)
-// document.getElementById('reset').addEventListener('click', () => {
-//   console.log('hello')
-//   init()
-// })
+document.getElementById('reset').addEventListener('click', () => {
+  console.log('hello')
+  init()
+})
 

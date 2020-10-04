@@ -1,6 +1,9 @@
 import {camera, mixers, scene, theta} from './index'
 import {AnimationMixer, LoopOnce, MathUtils} from 'three'
 import {changeToXPosition, changeToZPosition} from './helperFunction'
+import { worldTrees } from './trees';
+import { boneCollision, treeCollision, treeHit } from './collisionLogic';
+import {Allbones} from './dogbone'
 
 //dog.scenehas 4 actions 1:jump, 2:walk; 3:walkslow 4: die
 
@@ -69,6 +72,8 @@ export const dogMovement = () => {
     mixers[0].actions[0].enabled = true
     mixers[0].mixer.addEventListener( 'finished', function( e ) {
       console.log("died")
+      treeHit.position.z = Math.random() * 20 -10
+      treeHit.position.x = Math.random() * 20 -10
     })
       
      
@@ -109,5 +114,6 @@ const zInBounds = dog.scene.position.z < 10 && dog.scene.position.z > -10
    dog.scene.position.x = 0
    dog.scene.position.z = 0
  }
-
+worldTrees.forEach(tree => treeCollision(tree))
+Allbones.forEach(bone => boneCollision(bone))
 }
