@@ -1,6 +1,7 @@
 import { ConeGeometry, CylinderGeometry, Mesh, MeshStandardMaterial, Object3D } from 'three'
 import {scene} from './index'
 import {dog} from './dog'
+import { treeCollision } from './collisionLogic'
 
 const worldTrees = []
 
@@ -67,16 +68,18 @@ export const makeWorldTrees = () =>{
     }
 }
 
-const addMoreTrees = () =>{
-    const newTree = makeATree()    
-    newTree.position.y = 1
-    newTree.position.x = Math.random() *10 -5
-    console.log(newTree.position.x)
-    if(newTree.position.x > .5  || newTree.position.x < -.5){
-        worldTrees.push(newTree)
-        scene.add(newTree) 
-    }
-}
+// export const addMoreTrees = () =>{
+//     const newTree = makeATree()    
+//     newTree.position.y = 1
+//     newTree.position.x = Math.random() * 20 -10
+//     console.log(newTree.position.x)
+//     if(newTree.position.x > .5  || newTree.position.x < -.5){
+//         worldTrees.push(newTree)
+//         scene.add(newTree) 
+//     }
+// }
+
+
  const turning = ()=> {
     if(dog.movement.isTurningRight){
         worldTrees.forEach(tree => {
@@ -88,7 +91,7 @@ const addMoreTrees = () =>{
             
             if(tree.position.x > 10){
                 tree.position.x -= 25
-            }
+            } 
         })
     }
     else if(dog.movement.isTurningLeft){
@@ -96,12 +99,13 @@ const addMoreTrees = () =>{
             if(tree.position.z){
                 tree.position.x += .01 
             }else {
-        tree.position.x += .001
+                tree.position.x += .001
             }
-        if(tree.position.x < -10){
-            tree.position.x += 25
-        }
-    })}
+            if(tree.position.x < -10){
+                tree.position.x += 25
+            } 
+        })
+    }
 }
 
 export const moveTree = () => {
@@ -116,13 +120,18 @@ export const moveTree = () => {
         currentTree.position.z = 0
         currentTree.position.y = 1
         console.log(currentTree.position.x)
-    currentTree.position.x = Math.random() *10 -5
+        currentTree.position.x = Math.random() *10 -5
+    } else if(currentTree.position.z < .2 && currentTree.position.y < .2){
+         treeCollision(currentTree)
     }
+   
+
     })
     turning()
  
    
 }
+
 
 
 

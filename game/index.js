@@ -42,9 +42,6 @@ import { makeWorldTrees, moveTree } from './trees'
   
   
 
- setLighting()
- makeGround()
- makeWorldTrees()
   
   export const mixers = []
   const loader = new GLTFLoader()
@@ -81,5 +78,11 @@ import { makeWorldTrees, moveTree } from './trees'
     renderer.render(scene, camera)
   }
   
+export const init = () => {
+  setLighting()
+ makeGround()
+ makeWorldTrees()
   render()
+}
+  init()
   

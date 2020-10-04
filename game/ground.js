@@ -10,7 +10,6 @@ export const makeGround = () => {
 //  scene.add(ground)
  const gridHelper = new GridHelper(size, division)
  gridHelper.rotation.x = Math.PI / 10
- console.log(gridHelper)
  scene.add(gridHelper)
 
 

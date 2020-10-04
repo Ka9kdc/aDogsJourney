@@ -28,6 +28,7 @@ export function prepDog(gltf) {
   })
 
 actions[2].setLoop(LoopOnce, 1)
+actions[0].setLoop(LoopOnce, 1)
   const mixerInfo = {
     mixer,
     actions,
@@ -35,7 +36,7 @@ actions[2].setLoop(LoopOnce, 1)
   }
 
   mixers.push(mixerInfo)
-
+console.log(dog)
   dog.movement = {
      isWalking: false,
  isJumping: false,

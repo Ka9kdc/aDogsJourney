@@ -1,4 +1,4 @@
-import {camera, renderer, mixers} from './index'
+import {camera, renderer, init} from './index'
 import {checkKey, onMouseClick} from './helperFunction'
 
 window.addEventListener('resize', () => {
@@ -8,5 +8,9 @@ window.addEventListener('resize', () => {
 })
 
 window.addEventListener('keydown', checkKey)
-window.addEventListener('click', onMouseClick)
+// window.addEventListener('click', onMouseClick)
+// document.getElementById('reset').addEventListener('click', () => {
+//   console.log('hello')
+//   init()
+// })
 
