@@ -1,15 +1,18 @@
-import { GridHelper, Plane, Vector3, PlaneHelper } from "three"
+import { GridHelper, Plane, Vector3, PlaneHelper, PlaneGeometry, MeshStandardMaterial, Mesh } from "three"
 import { scene } from "."
 
 
 export const makeGround = () => {
  const size = 20
  const division = 20
-//  const ground = new Plane(new Vector3( 10, 10, 2 ), 3, 0x0000ff)
+//  const groundGeo = new PlaneGeometry(size,division)
+//  const groundMaterial = new MeshStandardMaterial({color: 'green'})
+//  const ground = new Mesh(groundGeo, groundMaterial)
+//  ground.rotation.x = Math.PI/2
 // console.log(ground)
 //  scene.add(ground)
  const gridHelper = new GridHelper(size, division)
-//  gridHelper.rotation.x = Math.PI / 10
+
  scene.add(gridHelper)
 
 

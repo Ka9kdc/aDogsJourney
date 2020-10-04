@@ -2,7 +2,9 @@ import {mixers, renderer, scene, camera} from './index'
 import {dog, dogMovement} from './dog'
 
 
-
+export let changeToXPosition = 180
+export let changeToZPosition = 0
+const degreeOfdirectionChange = 1
 
 export const playNextAction = (mixerInfo) => {
   const {actions, actionNdx} = mixerInfo
@@ -40,12 +42,21 @@ export function onMouseClick(event){
     }
 // // }
 
+const resetToIdle = () => {
+  const actions = dog.movement
+  actions.isWalking= false
+  actions.isJumping= false
+  actions.hasDied= false
+  actions.isTurningRight= false
+  actions.isTurningLeft= false
+}
+
 export function checkKey(event) {
   //rotation x is head to tail
   //rotation y is left and right
   //rotaion x clock
   const actions = dog.movement
-  
+  console.log(event.key)
   switch (event.key) {
     case ' ':
       actions.isJumping = true
@@ -58,33 +69,17 @@ export function checkKey(event) {
       
       break
     case 'ArrowDown':
-      actions.isWalking= false
- actions.isJumping= false
- actions.hasDied= false
- actions.isTurningRight= false
- actions.isTurningLeft= false
-
+     resetToIdle()
       break
     case 'ArrowRight':
-      if(dog.scene.rotation.y !== Math.PI-1){
-        dog.scene.rotation.y -= 1
-      }
-      if(dog.movement.isTurningLeft){
-        dog.movement.isTurningLeft = false
-      } else {
-        dog.movement.isTurningRight = true
-      }
+      changeToXPosition -= 4
+      changeToZPosition += 4
+      dog.scene.rotation.y +=  .1
       break
     case 'ArrowLeft':
-      if(dog.scene.rotation.y !== Math.PI+1){
-        dog.scene.rotation.y += 1
-      }
-      
-      if(dog.movement.isTurningRight){
-        dog.movement.isTurningRight = false
-      } else {
-        dog.movement.isTurningLeft = true
-      }
+    changeToXPosition += 4
+     changeToZPosition -= 4
+     dog.scene.rotation.y -=  .1
       break
     default:
       const mixerInfo = mixers[event.keyCode - 49]

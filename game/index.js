@@ -8,10 +8,11 @@ import {
   import {GLTFLoader} from 'three/examples/jsm/loaders/GLTFLoader.js'
   import './eventListners'
 import { makeGround } from './ground'
-  import {prepDog, dog, moveDog, dogMovement} from './dog'
+  import {prepDog, dog, moveDog, dogMovement, positionChange} from './dog'
 import { setLighting } from './lighting'
 import { makeWorldTrees, moveTree } from './trees'
 import { makeBones, moveBones } from './dogbone'
+import { changeToZPosition, changeToXPosition } from './helperFunction'
   
   //dog.scenehas 4 actions 1:jump, 2:walk; 3:walkslow 4: die
   
@@ -52,19 +53,16 @@ import { makeBones, moveBones } from './dogbone'
   )
 
  loader.load('/DogBone.glb', function(glft){ 
-  //  makeBones(glft)
+   makeBones(glft)
   } , undefined,
  function (error) {
    console.error(error)
  })
 
  let theta = 0
-  const render = () => {
-    requestAnimationFrame(render)
-    const dt = clock.getDelta()
-    
-    if(theta< 180){ //i did nested if statements so that i only had to reset theta to start the motion again
-      theta +=.1
+
+ const paning = () => {
+   theta +=.1
       if(camera.position.y > .001 || camera.position.y < -.001 || camera.position.z === 5 ){
     camera.position.x = 5 * Math.sin(MathUtils.degToRad(theta))
     camera.position.y = Math.sin(MathUtils.degToRad(theta))
@@ -72,9 +70,16 @@ import { makeBones, moveBones } from './dogbone'
     } else {
       console.log(camera.position)
       camera.position.z = 5
-      
       dog.scene.rotation.y = Math.PI 
     }
+ }
+
+  const render = () => {
+    requestAnimationFrame(render)
+    const dt = clock.getDelta()
+    
+    if(theta< 180){ //i did nested if statements so that i only had to reset theta to start the motion again
+      paning()
   } else if(theta < 184 ){
     theta +=.1
     camera.position.y += .1 
@@ -83,6 +88,13 @@ import { makeBones, moveBones } from './dogbone'
      
 if(dog){
   camera.lookAt(dog.scene.position)
+ if(dog.movement.isWalking || dog.movement.isJumping){
+   positionChange()
+
+  
+ 
+ }
+
 }
    
  
@@ -98,7 +110,7 @@ if(dog){
 export const init = () => {
   setLighting()
  makeGround()
-//  makeWorldTrees()
+ makeWorldTrees()
   render()
 }
   init()

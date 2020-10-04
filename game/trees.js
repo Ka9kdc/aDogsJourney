@@ -40,31 +40,15 @@ return tree
 export const makeWorldTrees = () =>{
     while(worldTrees.length < 12){
         const newTree = makeATree()
-        // newTree.position.z = 0
-        // newTree.position.y = 1
-
-        //z = 3 and y = 0 tree very close
-        //z = 4 & y = 0 under tree
-        //z=0 & y = .5 on horizon
+ 
       
-
-        let offset =  Math.random()
-        if(!(worldTrees.length%3)){
-            // newTree.position.y = offset*-1
-             newTree.position.z = offset * 4
-        } else {
-            newTree.position.y = offset
-        }
-        if(worldTrees.length%2) {
-            newTree.position.x = offset*10
-            
-        } else {
-            newTree.position.x = offset*-10
-        }
-        if(newTree.position.x > .5  || newTree.position.x < -.5){
+        newTree.position.z =  Math.random() * 20 - 10
+        newTree.position.x =  Math.random() * 20 - 10
+        
+        
             worldTrees.push(newTree)
             scene.add(newTree) 
-        }
+        
     }
 }
 
@@ -80,56 +64,9 @@ export const makeWorldTrees = () =>{
 // }
 
 
- const turning = ()=> {
-    if(dog.movement.isTurningRight){
-        worldTrees.forEach(tree => {
-            if(tree.position.z){
-                tree.position.x -= .01 
-            }else {
-              tree.position.x -= .001  
-            }
-            
-            if(tree.position.x > 10){
-                tree.position.x -= 25
-            } 
-        })
-    }
-    else if(dog.movement.isTurningLeft){
-        worldTrees.forEach(tree => {
-            if(tree.position.z){
-                tree.position.x += .01 
-            }else {
-                tree.position.x += .001
-            }
-            if(tree.position.x < -10){
-                tree.position.x += 25
-            } 
-        })
-    }
-}
-
-export const moveTree = () => {
-
-    worldTrees.forEach(currentTree => {
-        if(currentTree.position.y > 0) {
-        currentTree.position.y -= .001
-    } else {
-        currentTree.position.z += .01
-    } 
-    if(currentTree.position.z > 3){
-        currentTree.position.z = 0
-        currentTree.position.y = 1
-        currentTree.position.x = Math.random() *10 -5
-    } else if(currentTree.position.z < .2 && currentTree.position.y < .2){
-         treeCollision(currentTree)
-    }
-   
-
-    })
-    turning()
  
-   
-}
+
+
 
 
 
