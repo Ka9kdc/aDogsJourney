@@ -36,22 +36,65 @@ return tree
 }
 
 export const makeWorldTrees = () =>{
-    for(let i = 0; i < 10; i++){
+    while(worldTrees.length < 12){
         const newTree = makeATree()
-        newTree.position.z = Math.random()
-        if(i%2) {
-            newTree.position.x = Math.random()*10
+        // newTree.position.z = 0
+        // newTree.position.y = 1
+
+        //z = 3 and y = 0 tree very close
+        //z = 4 & y = 0 under tree
+        //z=0 & y = .5 on horizon
+      
+
+        let offset =  Math.random()
+        if(!(worldTrees.length%3)){
+            // newTree.position.y = offset*-1
+             newTree.position.z = offset * 4
         } else {
-            newTree.position.x = Math.random()*-10
+            newTree.position.y = offset
         }
-        worldTrees.push(newTree)
-        scene.add(newTree)
+        if(worldTrees.length%2) {
+            newTree.position.x = offset*5
+            
+        } else {
+            newTree.position.x = offset*-5
+        }
+        if(newTree.position.x > .5  || newTree.position.x < -.5){
+            worldTrees.push(newTree)
+            scene.add(newTree) 
+        }
     }
-    console.log(worldTrees)
+}
+
+const addMoreTrees = () =>{
+    const newTree = makeATree()    
+    newTree.position.y = 1
+    newTree.position.x = Math.random() *10 -5
+    console.log(newTree.position.x)
+    if(newTree.position.x > .5  || newTree.position.x < -.5){
+        worldTrees.push(newTree)
+        scene.add(newTree) 
+    }
+}
+
+export const moveTree = () => {
+
+    worldTrees.forEach(currentTree => {
+        if(currentTree.position.y > 0) {
+        currentTree.position.y -= .001
+    } else {
+        currentTree.position.z += .01
+    } 
+    if(currentTree.position.z > 3){
+        currentTree.position.z = 0
+        currentTree.position.y = 1
+    currentTree.position.x = Math.random() *10 -5
+    }
+    })
+    // worldTrees.filter(currentTree => currentTree.position.z === 0)
+    // console.log(worldTrees.length)
+   
 }
 
 
-// const moveTrees(){
-
-// }
 

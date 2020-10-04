@@ -13,9 +13,10 @@ import {
   } from 'three'
   import {GLTFLoader} from 'three/examples/jsm/loaders/GLTFLoader.js'
   import './eventListners'
-  import {playNextAction, prepDog} from './helperFunction'
+import { makeGround } from './ground'
+  import {prepDog} from './dog'
 import { setLighting } from './lighting'
-import { makeWorldTrees } from './trees'
+import { makeWorldTrees, moveTree } from './trees'
   
   //dog.scenehas 4 actions 1:jump, 2:walk; 3:walkslow 4: die
   
@@ -29,7 +30,7 @@ import { makeWorldTrees } from './trees'
     0.1,
     1000
   )
-  camera.position.z = 10
+  camera.position.z = 5
   
   const clock = new Clock()
 
@@ -39,8 +40,10 @@ import { makeWorldTrees } from './trees'
   renderer.setSize(window.innerWidth, window.innerHeight)
   document.getElementById('app').appendChild(renderer.domElement)
   
+  
 
  setLighting()
+ makeGround()
  makeWorldTrees()
   
   export const mixers = []
@@ -55,9 +58,14 @@ import { makeWorldTrees } from './trees'
       console.error(error)
     }
   )
-  
+  let isWalking = false
+  let isJumping = false
+  let hasDied = false
   const render = () => {
     requestAnimationFrame(render)
+    if(isWalking){
+      moveTree()
+    }
   
     const dt = clock.getDelta()
   

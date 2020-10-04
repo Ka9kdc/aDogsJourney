@@ -13,6 +13,6 @@ export function setLighting() {
     sun.shadow.mapSize.height = 256
     sun.shadow.camera.near = 0.5
     sun.shadow.camera.far = 50
-    // const spotlight = new SpotLight(0x00ff00, 1, 1000, 25)
+    // const spotlight = new SpotLight(0x00ff00, 1, 1000)
     // scene.add(spotlight)
   }
