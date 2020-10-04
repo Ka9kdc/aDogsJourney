@@ -13,10 +13,10 @@ export function prepDog(gltf) {
     dogAnimations[clip.name] = clip
   })
   dog.scene.animations = dogAnimations
-  dog.scene.rotation.y = Math.PI 
+  // dog.scene.rotation.y = Math.PI 
   
   dog.scene.scale.multiplyScalar(1/3)
-  dog.scene.rotation.x = Math.PI / 10
+  // dog.scene.rotation.x = Math.PI / 10
 
  
 

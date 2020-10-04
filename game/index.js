@@ -51,7 +51,9 @@ import { makeBones, moveBones } from './dogbone'
     }
   )
 
- loader.load('/DogBone.glb', function(glft){ makeBones(glft)} , undefined,
+ loader.load('/DogBone.glb', function(glft){ 
+  //  makeBones(glft)
+  } , undefined,
  function (error) {
    console.error(error)
  })
@@ -61,29 +63,27 @@ import { makeBones, moveBones } from './dogbone'
     requestAnimationFrame(render)
     const dt = clock.getDelta()
     
-    if(dog){
-      if(dog.movement.isWalking){
-        moveTree()
-        moveBones()
-      } else if(dog.movement.isJumping){
-        moveTree()
-        moveBones()
-        moveDog()
-      } else if( dog.movement.hasDied){
-       theta +=.1
-    // camera.position.x = 5 * Math.sin(MathUtils.degToRad(theta))
+    if(theta< 180){ //i did nested if statements so that i only had to reset theta to start the motion again
+      theta +=.1
+      if(camera.position.y > .001 || camera.position.y < -.001 || camera.position.z === 5 ){
+    camera.position.x = 5 * Math.sin(MathUtils.degToRad(theta))
     camera.position.y = Math.sin(MathUtils.degToRad(theta))
     camera.position.z = 5 * Math.cos(MathUtils.degToRad(theta))
- 
- if(theta >100){
-  dog.movement.hasDied = false
-  camera.position.set(0,0,5)
-  theta =10
-  dogMovement()
- }
- camera.lookAt(0,0,0)
-      }
+    } else {
+      console.log(camera.position)
+      camera.position.z = 5
+      
+      dog.scene.rotation.y = Math.PI 
     }
+  } else if(theta < 184 ){
+    theta +=.1
+    camera.position.y += .1 
+  }
+
+     
+if(dog){
+  camera.lookAt(dog.scene.position)
+}
    
  
     
@@ -98,7 +98,7 @@ import { makeBones, moveBones } from './dogbone'
 export const init = () => {
   setLighting()
  makeGround()
- makeWorldTrees()
+//  makeWorldTrees()
   render()
 }
   init()
