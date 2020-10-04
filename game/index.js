@@ -17,6 +17,7 @@ import { makeGround } from './ground'
   import {prepDog, dog, moveDog} from './dog'
 import { setLighting } from './lighting'
 import { makeWorldTrees, moveTree } from './trees'
+import { makeBones, moveBones } from './dogbone'
   
   //dog.scenehas 4 actions 1:jump, 2:walk; 3:walkslow 4: die
   
@@ -56,16 +57,22 @@ import { makeWorldTrees, moveTree } from './trees'
     }
   )
 
+ loader.load('/DogBone.glb', function(glft){ makeBones(glft)} , undefined,
+ function (error) {
+   console.error(error)
+ })
+
   const render = () => {
     requestAnimationFrame(render)
     if(dog){
       if(dog.movement.isWalking){
         moveTree()
+        moveBones()
       } else if(dog.movement.isJumping){
         moveTree()
+        moveBones()
         moveDog()
       }
-      
     }
   
     const dt = clock.getDelta()

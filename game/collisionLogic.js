@@ -17,3 +17,15 @@ export const treeCollision = (tree) => {
     tree.position.x = Math.random() * 20 -10
    } 
 }
+
+export const boneCollision = (bone) => {
+    if(bone.position.x < .4 && bone.position.x > -.4){
+        console.log('hit') 
+    bone.position.x = Math.random() *20 -10
+    bone.position.y = Math.random() + .5
+    bone.position.z = 0
+    bone.rotation.x = Math.PI / Math.random()*10
+    }
+    
+
+}

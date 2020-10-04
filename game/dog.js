@@ -1,6 +1,7 @@
 import {mixers, scene} from './index'
 import {AnimationMixer, LoopOnce} from 'three'
 
+//dog.scenehas 4 actions 1:jump, 2:walk; 3:walkslow 4: die
 
 let counter = 0
 export let dog; 
@@ -36,7 +37,6 @@ actions[0].setLoop(LoopOnce, 1)
   }
 
   mixers.push(mixerInfo)
-console.log(dog)
   dog.movement = {
      isWalking: false,
  isJumping: false,

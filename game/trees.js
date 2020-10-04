@@ -119,7 +119,6 @@ export const moveTree = () => {
     if(currentTree.position.z > 3){
         currentTree.position.z = 0
         currentTree.position.y = 1
-        console.log(currentTree.position.x)
         currentTree.position.x = Math.random() *10 -5
     } else if(currentTree.position.z < .2 && currentTree.position.y < .2){
          treeCollision(currentTree)
