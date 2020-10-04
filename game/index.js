@@ -9,12 +9,12 @@ import {
     AnimationMixer,
     Clock,
     Object3D,
-    FogExp2,
+    FogExp2, MathUtils
   } from 'three'
   import {GLTFLoader} from 'three/examples/jsm/loaders/GLTFLoader.js'
   import './eventListners'
 import { makeGround } from './ground'
-  import {prepDog, dog, moveDog} from './dog'
+  import {prepDog, dog, moveDog, dogMovement} from './dog'
 import { setLighting } from './lighting'
 import { makeWorldTrees, moveTree } from './trees'
 import { makeBones, moveBones } from './dogbone'
@@ -62,8 +62,11 @@ import { makeBones, moveBones } from './dogbone'
    console.error(error)
  })
 
+ let theta = 0
   const render = () => {
     requestAnimationFrame(render)
+    const dt = clock.getDelta()
+    
     if(dog){
       if(dog.movement.isWalking){
         moveTree()
@@ -72,11 +75,24 @@ import { makeBones, moveBones } from './dogbone'
         moveTree()
         moveBones()
         moveDog()
+      } else if( dog.movement.hasDied){
+       theta +=.1
+    // camera.position.x = 5 * Math.sin(MathUtils.degToRad(theta))
+    camera.position.y = Math.sin(MathUtils.degToRad(theta))
+    camera.position.z = 5 * Math.cos(MathUtils.degToRad(theta))
+ 
+ if(theta >100){
+  dog.movement.hasDied = false
+  camera.position.set(0,0,5)
+  theta =10
+  dogMovement()
+ }
+ camera.lookAt(0,0,0)
       }
     }
-  
-    const dt = clock.getDelta()
-  
+   
+ 
+    
     for (const {mixer} of mixers) {
       mixer.update(dt)
       
