@@ -1,5 +1,6 @@
 import {mixers, scene} from './index'
-import {AnimationMixer} from 'three'
+import {AnimationMixer, LoopOnce} from 'three'
+import { addMixerListeners } from './eventListners';
 
 export let dog; 
 export function prepDog(gltf) {
@@ -10,11 +11,13 @@ export function prepDog(gltf) {
     dogAnimations[clip.name] = clip
   })
   dog.scene.animations = dogAnimations
-  dog.scene.rotation.y = 2 * Math.PI 
+  dog.scene.rotation.y = Math.PI 
   
-  dog.scene.scale.multiplyScalar(1/15)
+  dog.scene.scale.multiplyScalar(1/3)
+  dog.scene.rotation.x = Math.PI / 10
 
-  dog.scene.position.z = 4
+ 
+
 
   const mixer = new AnimationMixer(dog.scene)
   const actions = Object.values(dog.scene.animations).map((clip) => {
@@ -22,6 +25,8 @@ export function prepDog(gltf) {
     action.enabled = false
     return action
   })
+
+actions[2].setLoop(LoopOnce, 1)
   const mixerInfo = {
     mixer,
     actions,
@@ -29,5 +34,43 @@ export function prepDog(gltf) {
   }
 
   mixers.push(mixerInfo)
+
+  dog.movement = {
+     isWalking: false,
+ isJumping: false,
+ hasDied: false,
+ isTurningRight: false,
+ isTurningLeft: false,
+  }
   scene.add(dog.scene)
+
 }
+
+export const dogMovement = () => {
+  const actions = dog.movement
+  mixers[0].actions.forEach(action => {
+    action.enabled = false
+  })
+  if(actions.isWalking){
+    mixers[0].actions[4].enabled = true
+  } else if(actions.isJumping){
+    mixers[0].actions[2].enabled = true
+    mixers[0].mixer.addEventListener( 'finished', function( e ) {
+      if(actions.isWalking === 0) actions.isWalking = true
+      actions.isJumping = false
+      dogMovement()
+    } ); // properties of e: type, action and direction
+  } else if(actions.hasDied){
+    mixers[0].actions[0].enabled = true
+  } else {
+    mixers[0].actions[1].enabled = true
+  }
+  mixers[0].actions.forEach(action => {
+    if (action.enabled) {
+      action.play()
+    } else {
+      action.stop()
+    }
+  })
+}
+

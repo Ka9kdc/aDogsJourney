@@ -1,4 +1,4 @@
-import {camera, renderer} from './index'
+import {camera, renderer, mixers} from './index'
 import {checkKey, onMouseClick} from './helperFunction'
 
 window.addEventListener('resize', () => {
@@ -9,3 +9,4 @@ window.addEventListener('resize', () => {
 
 window.addEventListener('keydown', checkKey)
 window.addEventListener('click', onMouseClick)
+

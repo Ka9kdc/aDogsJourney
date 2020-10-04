@@ -1,10 +1,8 @@
 import {mixers, renderer, scene, camera} from './index'
-import {dog} from './dog'
+import {dog, dogMovement} from './dog'
 
 
-let isWalking = false
-let isJumping = false
-let hasDied = false
+
 
 export const playNextAction = (mixerInfo) => {
   const {actions, actionNdx} = mixerInfo
@@ -24,7 +22,7 @@ export const playNextAction = (mixerInfo) => {
 
 export function onMouseClick(event){
     event.preventDefault()
-    console.log('clicked')
+    console.log('clicd')
 
 // actions[0].play()
 // dog.animations.death.play()
@@ -46,18 +44,34 @@ export function checkKey(event) {
   //rotation x is head to tail
   //rotation y is left and right
   //rotaion x clock
+  const actions = dog.movement
+  
   switch (event.key) {
+    case ' ':
+      actions.isJumping = true
+      if(actions.isWalking){
+        actions.isWalking = 0 //seting is walking to 0 to pause the action
+      }
+      break
     case 'ArrowUp':
-      dog.scene.rotation.y += 1
+      actions.isWalking = true
+      
       break
     case 'ArrowDown':
-      dog.scene.rotation.y -= 1
+      actions.isWalking= false
+ actions.isJumping= false
+ actions.hasDied= false
+ actions.isTurningRight= false
+ actions.isTurningLeft= false
+
       break
     case 'ArrowRight':
-      dog.scene.position.y += 1
+      dog.scene.rotation.y -= 1
+      dog.movement.isTurningRight = true
       break
     case 'ArrowLeft':
-      dog.scene.position.y -= 1
+      dog.scene.rotation.y += 1
+      dog.movement.isTurningLeft = true
       break
     default:
       const mixerInfo = mixers[event.keyCode - 49]
@@ -65,10 +79,12 @@ export function checkKey(event) {
       if (!mixerInfo) {
         return
       }
+      
       playNextAction(mixerInfo)
   }
+  dogMovement()
 
-  renderer.render(scene, camera)
+  
 }
 
 

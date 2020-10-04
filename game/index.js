@@ -14,7 +14,7 @@ import {
   import {GLTFLoader} from 'three/examples/jsm/loaders/GLTFLoader.js'
   import './eventListners'
 import { makeGround } from './ground'
-  import {prepDog} from './dog'
+  import {prepDog, dog} from './dog'
 import { setLighting } from './lighting'
 import { makeWorldTrees, moveTree } from './trees'
   
@@ -23,7 +23,7 @@ import { makeWorldTrees, moveTree } from './trees'
   
 
   export const scene = new Scene()
-  // scene.fog = new FogExp2(0xf0fff0, 0.14)
+  scene.fog = new FogExp2(0xf0fff0, 0.14)
   export const camera = new PerspectiveCamera(
     75,
     window.innerWidth / window.innerHeight,
@@ -58,12 +58,10 @@ import { makeWorldTrees, moveTree } from './trees'
       console.error(error)
     }
   )
-  let isWalking = false
-  let isJumping = false
-  let hasDied = false
+ 
   const render = () => {
     requestAnimationFrame(render)
-    if(isWalking){
+    if(dog && dog.movement.isWalking){
       moveTree()
     }
   
@@ -71,6 +69,7 @@ import { makeWorldTrees, moveTree } from './trees'
   
     for (const {mixer} of mixers) {
       mixer.update(dt)
+      
     }
   
     renderer.render(scene, camera)
