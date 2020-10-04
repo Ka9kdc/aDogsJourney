@@ -2,13 +2,7 @@ import {
     Scene,
     PerspectiveCamera,
     WebGLRenderer,
-    PointLight,
-    Raycaster,
-    Vector2,
-    LoadingManager,
-    AnimationMixer,
     Clock,
-    Object3D,
     FogExp2, MathUtils
   } from 'three'
   import {GLTFLoader} from 'three/examples/jsm/loaders/GLTFLoader.js'

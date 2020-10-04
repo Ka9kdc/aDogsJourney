@@ -1,4 +1,4 @@
-import {camera, mixers, scene} from './index'
+import {camera, mixers, scene, theta} from './index'
 import {AnimationMixer, LoopOnce} from 'three'
 
 //dog.scenehas 4 actions 1:jump, 2:walk; 3:walkslow 4: die
@@ -66,7 +66,11 @@ export const dogMovement = () => {
     } ); // properties of e: type, action and direction
   } else if(actions.hasDied){
     mixers[0].actions[0].enabled = true
-    
+    mixers[0].mixer.addEventListener( 'finished', function( e ) {
+      console.log("died")
+    })
+      
+     
   } else {
     mixers[0].actions[1].enabled = true
   }

@@ -1,5 +1,7 @@
 import {dog, dogMovement} from './dog'
 
+const scoreBoard = document.getElementById('score')
+let score = 0
 
 //treeTrunks have a radius of .1
 
@@ -15,7 +17,10 @@ export const treeCollision = (tree) => {
  tree.position.z = 0
  tree.position.y = 1
     tree.position.x = Math.random() * 20 -10
+     score -= 10
+   scoreBoard.innerText = score
    } 
+  
 }
 
 export const boneCollision = (bone) => {
@@ -25,7 +30,8 @@ export const boneCollision = (bone) => {
     bone.position.y = Math.random() + .5
     bone.position.z = 0
     bone.rotation.x = Math.PI / Math.random()*10
+     score += 20
+    scoreBoard.innerText = score
     }
-    
-
+   
 }
