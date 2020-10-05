@@ -9,8 +9,7 @@
     "start": "node server",
     "start-dev": "NODE_ENV='development' npm run build & NODE_ENV='development' npm run start-server",
     "start-server": "nodemon server -e html,js,scss --ignore public --ignore game",
-    "build": "webpack -w",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "webpack -w"
   },
   "author": "Kelsey",
   "license": "ISC",
