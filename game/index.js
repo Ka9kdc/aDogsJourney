@@ -12,6 +12,8 @@ import {prepDog, dog, positionChange} from './dog'
 import { setLighting } from './lighting'
 import { makeWorldiceBurgs} from './iceBurg'
 import { makeBones} from './dogbone'
+import { resetScore } from './collisionLogic'
+
   
   //dog.scenehas 4 actions 1:jump, 2:walk; 3:walkslow 4: die
   
@@ -60,7 +62,7 @@ const loadModels =() => {
 }
   
 
- export let theta = 0
+let theta;
 
  const paning = () => {
   theta +=.1
@@ -110,11 +112,14 @@ const render = () => {
 export const init = () => {
   scene = new Scene()
   scene.fog = new FogExp2(0xf0fff0, 0.14)
-  document.getElementById('app').appendChild(renderer.domElement)
+ console.log('bye')
   setLighting()
   makeGround()
   loadModels()
   makeWorldiceBurgs()
+  resetScore()
+  theta = 0
+  document.getElementById('app').appendChild(renderer.domElement)
   render()
 }
   

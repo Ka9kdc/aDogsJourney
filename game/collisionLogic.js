@@ -39,3 +39,8 @@ export const boneCollision = (bone) => {
     }
    
 }
+
+export const resetScore = () => {
+    score = 0
+    scoreBoard.innerText = score
+}

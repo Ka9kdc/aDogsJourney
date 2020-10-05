@@ -1,3 +1,8 @@
+@font-face {
+    font-family: myTitle;
+    src: url('DancingScript-VariableFont_wght.ttf');
+  }
+
 html, body {
     width: 100vw;
     height: 100vh;
@@ -23,4 +28,22 @@ html, body {
 
 .header button {
     margin: 1em;
+}
+
+#title {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2.5em;
+    color: blue; 
+    text-align: center;
+    height: 100vh;
+    background-image: url('stockvault-frozen-ice-background268918.jpg');
+    background-size: cover;
+    font-family: myTitle;
+
+}
+
+button {
+    font-size: 1em;
 }

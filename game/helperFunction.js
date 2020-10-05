@@ -4,7 +4,7 @@ import {dog, dogMovement} from './dog'
 
 export let changeToXPosition = 180
 export let changeToZPosition = 0
-const degreeOfdirectionChange = 1
+
 
 export const playNextAction = (mixerInfo) => {
   const {actions, actionNdx} = mixerInfo
@@ -20,27 +20,6 @@ export const playNextAction = (mixerInfo) => {
   })
 }
 
-
-
-export function onMouseClick(event){
-    event.preventDefault()
-    console.log('clicd')
-
-// actions[0].play()
-// dog.animations.death.play()
-    // mouse.x = (event.clientX / window.innerWidth) * 2 -1;
-    // mouse.y = - (event.clientY / window.innerHeight) *2 +1;
-
-    // raycaster.setFromCamera(mouse, camera)
-
-    // const intersects =  raycaster.intersectObjects(scene.children, true) //returns an array
-    // console.log(intersects)
-    // for(let i = 0; i < intersects.length; i++){
-    //     console.log(intersects[i].object)
-    //     intersects[i].object.position.x = Math.random() * 10
-
-    }
-// // }
 
 const resetToIdle = () => {
   const actions = dog.movement
@@ -83,7 +62,6 @@ export function checkKey(event) {
       break
     default:
       const mixerInfo = mixers[event.keyCode - 49]
-      // console.log(mixerInfo)
       if (!mixerInfo) {
         return
       }
