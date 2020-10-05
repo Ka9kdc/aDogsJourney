@@ -21,6 +21,7 @@ export function checkKey(event) {
   //rotation x is head to tail
   //rotation y is left and right
   //rotaion x clock
+  console.log(event.key)
   const actions = dog.movement
   switch (event.key) {
     case ' ':
@@ -28,28 +29,32 @@ export function checkKey(event) {
       if(actions.isWalking){
         actions.isWalking = 0 //seting is walking to 0 to pause the action
       }
+      dogMovement()
       break
     case 'ArrowUp':
       actions.isWalking = true
-      
+      dogMovement()
       break
     case 'ArrowDown':
      resetToIdle()
+     dogMovement()
       break
     case 'ArrowRight':
       changeToXPosition -= 4
       changeToZPosition += 4
       dog.scene.rotation.y +=  .1
+      dogMovement()
       break
     case 'ArrowLeft':
     changeToXPosition += 4
      changeToZPosition -= 4
      dog.scene.rotation.y -=  .1
+     dogMovement()
       break
     default:
       break
   }
-  dogMovement()
+  
 
 }
 

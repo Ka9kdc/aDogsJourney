@@ -1,4 +1,4 @@
-import {camera, renderer, init} from './index'
+import {camera, renderer, init, vrInit} from './index'
 import {checkKey} from './helperFunction'
 
 window.addEventListener('resize', () => {
@@ -23,3 +23,10 @@ document.getElementById('End').addEventListener('click', () => {
   document.getElementById('app').replaceChild(startPage, renderer.domElement)
 })
 
+
+document.getElementById('vr').addEventListener('click', () => {
+  if(document.getElementById('title')){
+    document.getElementById('app').removeChild(startPage)
+  }
+  vrInit()
+})

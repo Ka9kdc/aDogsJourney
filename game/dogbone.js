@@ -1,6 +1,6 @@
-import { scene } from "."
+import { scene, Allbones } from "."
 
-export const Allbones = []
+
 
 export const makeBones = (gltf) => {
     const dogbone = gltf.scene

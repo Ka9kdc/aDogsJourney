@@ -5,24 +5,19 @@ import {
     Clock,
     FogExp2, MathUtils, Color
   } from 'three'
-import {GLTFLoader} from 'three/examples/jsm/loaders/GLTFLoader.js'
+import {loadModels} from './loader'
 import './eventListners'
 import { makeGround } from './ground'
-import {prepDog, dog, positionChange} from './dog'
+import {dog, positionChange} from './dog'
 import { setLighting} from './lighting'
 import { makeWorldiceBurgs} from './iceBurg'
-import { makeBones} from './dogbone'
 import { resetScore } from './collisionLogic'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
 import {VRButton } from "three/examples/jsm/webxr/VRButton.js"
 
-  
-  //dog.scenehas 4 actions 1:jump, 2:walk; 3:walkslow 4: die
-  
-  
 
 export let scene;
-
+export let Allbones = []
 
 export const camera = new PerspectiveCamera(
   75,
@@ -38,35 +33,14 @@ const clock = new Clock()
 export const renderer = new WebGLRenderer({antialias: true, alpha: true})
 renderer.setClearColor(0xfffafa, 1)
 renderer.setSize(window.innerWidth, window.innerHeight)
-document.getElementById('buttons').appendChild( VRButton.createButton( renderer ) )
-
+document.getElementById('vr').appendChild( VRButton.createButton( renderer ) )
+renderer.xr.enabled = true;
 
 const orbitControls = new OrbitControls(camera, renderer.domElement)
 // orbitControls.addEventListener('change',  renderer.render(scene, camera))
 orbitControls.enableZoom = false
   
 export const mixers = []
-const loader = new GLTFLoader()
-const loadModels =() => {
-  loader.load(
-    '/Pug.gltf',
-    function (gltf) {
-      prepDog(gltf)      
-    },
-    undefined,
-    function (error) {
-      console.error(error)
-    }
-  )
-
-  loader.load('/DogBone.glb', function(glft){ 
-      makeBones(glft)
-    } , undefined,
-    function (error) {
-      console.error(error)
-    })
-}
-  
 
 let theta;
 
@@ -85,9 +59,7 @@ function paning() {
 
 }
  
-
-const render = () => {
-  requestAnimationFrame(render)
+const update = () => {
   const dt = clock.getDelta()
   
   if(theta< 180){ //i did nested if statements so that i only had to reset theta to start the motion again
@@ -107,20 +79,26 @@ const render = () => {
     } 
   }
    
- 
-    
   for (const {mixer} of mixers) {
     mixer.update(dt)
     
   }
-  
   renderer.render(scene, camera)
+}
+
+
+const render = () => {
+  requestAnimationFrame(render)
+  update()
+  
+  
 }
   
 export const init = () => {
   scene = new Scene()
   scene.fog = new FogExp2(0xf0fff0, 0.14)
   scene.background= new Color(0xa0a0a0)
+  Allbones = []
   setLighting()
   makeGround()
   loadModels()
@@ -131,4 +109,18 @@ export const init = () => {
   render()
 }
   
-  
+
+export const vrInit = () => {
+  scene = new Scene()
+  scene.fog = new FogExp2(0xf0fff0, 0.14)
+  scene.background= new Color(0xa0a0a0)
+  Allbones = []
+  setLighting()
+  makeGround()
+  loadModels()
+  makeWorldiceBurgs()
+  resetScore()
+  theta = 0
+  document.getElementById('app').appendChild(renderer.domElement)
+  renderer.setAnimationLoop(update())
+}
