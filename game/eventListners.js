@@ -14,7 +14,7 @@ document.getElementById('reset').addEventListener('click', () => {
 })
 
 export const startPage = document.getElementById('title')
-startPage.addEventListener('click', () => {
+document.getElementById('start').addEventListener('click', () => {
   document.getElementById('app').removeChild(startPage)
   init()
 })

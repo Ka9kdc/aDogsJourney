@@ -22,7 +22,6 @@ export function checkKey(event) {
   //rotation y is left and right
   //rotaion x clock
   const actions = dog.movement
-  console.log(event.key)
   switch (event.key) {
     case ' ':
       actions.isJumping = true

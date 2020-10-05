@@ -14,6 +14,7 @@ import { makeWorldiceBurgs} from './iceBurg'
 import { makeBones} from './dogbone'
 import { resetScore } from './collisionLogic'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
+import {VRButton } from "three/examples/jsm/webxr/VRButton.js"
 
   
   //dog.scenehas 4 actions 1:jump, 2:walk; 3:walkslow 4: die
@@ -37,6 +38,7 @@ const clock = new Clock()
 export const renderer = new WebGLRenderer({antialias: true, alpha: true})
 renderer.setClearColor(0xfffafa, 1)
 renderer.setSize(window.innerWidth, window.innerHeight)
+document.getElementById('buttons').appendChild( VRButton.createButton( renderer ) )
 
 
 const orbitControls = new OrbitControls(camera, renderer.domElement)
