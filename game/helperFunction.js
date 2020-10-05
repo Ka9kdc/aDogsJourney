@@ -4,10 +4,6 @@ import {dog, dogMovement} from './dog'
 export let changeToXPosition = 180
 export let changeToZPosition = 0
 
-
-
-
-
 const resetToIdle = () => {
   const actions = dog.movement
   actions.isWalking= false
@@ -21,7 +17,6 @@ export function checkKey(event) {
   //rotation x is head to tail
   //rotation y is left and right
   //rotaion x clock
-  console.log(event.key)
   const actions = dog.movement
   switch (event.key) {
     case ' ':
@@ -36,8 +31,8 @@ export function checkKey(event) {
       dogMovement()
       break
     case 'ArrowDown':
-     resetToIdle()
-     dogMovement()
+      resetToIdle()
+      dogMovement()
       break
     case 'ArrowRight':
       changeToXPosition -= 4
@@ -46,16 +41,14 @@ export function checkKey(event) {
       dogMovement()
       break
     case 'ArrowLeft':
-    changeToXPosition += 4
-     changeToZPosition -= 4
-     dog.scene.rotation.y -=  .1
-     dogMovement()
+      changeToXPosition += 4
+      changeToZPosition -= 4
+      dog.scene.rotation.y -=  .1
+      dogMovement()
       break
     default:
       break
   }
-  
-
 }
 
 

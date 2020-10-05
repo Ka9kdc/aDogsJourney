@@ -33,14 +33,16 @@ const clock = new Clock()
 export const renderer = new WebGLRenderer({antialias: true, alpha: true})
 renderer.setClearColor(0xfffafa, 1)
 renderer.setSize(window.innerWidth, window.innerHeight)
+
+//adding VR
 document.getElementById('vr').appendChild( VRButton.createButton( renderer ) )
 renderer.xr.enabled = true;
 
+//adding camera control
 const orbitControls = new OrbitControls(camera, renderer.domElement)
-// orbitControls.addEventListener('change',  renderer.render(scene, camera))
 orbitControls.enableZoom = false
   
-export const mixers = []
+export const mixers = [] //will be holding all the animations
 
 let theta;
 
@@ -90,8 +92,6 @@ const update = () => {
 const render = () => {
   requestAnimationFrame(render)
   update()
-  
-  
 }
   
 export const init = () => {

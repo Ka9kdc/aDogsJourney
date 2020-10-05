@@ -9,3 +9,4 @@ const PORT = process.env.PORT || 3000
 app.listen(PORT, () =>
     console.log(`Mixing it up on port ${PORT}`)
 )
+//server was set up for localhosting, developement and to serve up static files

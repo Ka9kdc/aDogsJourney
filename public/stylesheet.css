@@ -11,19 +11,15 @@ html, body {
     overflow: hidden;
 }
 
-
-
 .header {
     display: flex;
     position: sticky;
     justify-content: space-between;
-    margin: .5em 2em 0em 4em;
-    
+    margin: .5em 2em 0em 4em;   
     position: fixed;
-  top: 0;
-  width: 90%;
-  text-align: center;
-   
+    top: 0;
+    width: 90%;
+    text-align: center;
 }
 
 .header button {
@@ -41,7 +37,6 @@ html, body {
     background-image: url('stockvault-frozen-ice-background268918.jpg');
     background-size: cover;
     font-family: myTitle;
-
 }
 
 button {

@@ -1,6 +1,9 @@
 import {camera, renderer, init, vrInit} from './index'
 import {checkKey} from './helperFunction'
 
+
+//the majority of the event listeners used
+
 window.addEventListener('resize', () => {
   renderer.setSize(window.innerWidth, window.innerHeight)
   camera.aspect = window.innerWidth / window.innerHeight

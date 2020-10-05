@@ -18,13 +18,8 @@ export function prepDog(gltf) {
     dogAnimations[clip.name] = clip
   })
   dog.scene.animations = dogAnimations
-  // dog.scene.rotation.y = Math.PI 
   
   dog.scene.scale.multiplyScalar(1/3)
-  // dog.scene.rotation.x = Math.PI / 10
-
- 
-
 
   const mixer = new AnimationMixer(dog.scene)
   const actions = Object.values(dog.scene.animations).map((clip) => {
@@ -33,8 +28,9 @@ export function prepDog(gltf) {
     return action
   })
 
-actions[2].setLoop(LoopOnce, 1)
-actions[0].setLoop(LoopOnce, 1)
+  actions[2].setLoop(LoopOnce, 1)
+  actions[0].setLoop(LoopOnce, 1)
+
   const mixerInfo = {
     mixer,
     actions,
@@ -43,14 +39,14 @@ actions[0].setLoop(LoopOnce, 1)
 
   mixers.push(mixerInfo)
   dog.movement = {
-     isWalking: false,
- isJumping: false,
- hasDied: false,
- isTurningRight: false,
- isTurningLeft: false,
+    isWalking: false,
+    isJumping: false,
+    hasDied: false,
+    isTurningRight: false,
+    isTurningLeft: false,
   }
   scene.add(dog.scene)
-spotlight.target = dog.scene
+  spotlight.target = dog.scene
 }
 
 export const dogMovement = () => {
@@ -64,20 +60,20 @@ export const dogMovement = () => {
     mixers[0].actions[2].enabled = true
     
     mixers[0].mixer.addEventListener( 'finished', function() {
-      if(actions.isWalking === 0) actions.isWalking = true
+      if(actions.isWalking === 0) {
+        actions.isWalking = true
+      }
       actions.isJumping = false
       dog.scene.position.y = 0
       dogMovement()
-    } ); // properties of e: type, action and direction
+    } ); 
   } else if(actions.hasDied){
     mixers[0].actions[0].enabled = true
+    
     mixers[0].mixer.addEventListener( 'finished', function() {
-      console.log("died")
       iceBurgHit.position.z = Math.random() * 20 -10
       iceBurgHit.position.x = Math.random() * 20 -10
     })
-      
-     
   } else {
     mixers[0].actions[1].enabled = true
   }
@@ -90,7 +86,7 @@ export const dogMovement = () => {
   })
 }
 
-export const moveDog = () =>{
+export const moveDog = () =>{ //dog jumpping hieght motion
   if(counter < 40){
     dog.scene.position.y += .01
   }else if (counter === 84) { //max height reached is y = .42
@@ -101,20 +97,20 @@ export const moveDog = () =>{
   counter++
 }
 
-export const positionChange = () => {
+export const positionChange = () => { //dog movement over ground
   const xInbounds = dog.scene.position.x < 10 && dog.scene.position.x > -10 
-const zInBounds = dog.scene.position.z < 10 && dog.scene.position.z > -10
+  const zInBounds = dog.scene.position.z < 10 && dog.scene.position.z > -10
   if(xInbounds && zInBounds){
     dog.scene.position.x -= Math.sin(MathUtils.degToRad(changeToXPosition)) /100
     dog.scene.position.z -= Math.cos(MathUtils.degToRad(changeToZPosition)) /100
   } else if(xInbounds){
     dog.scene.position.x -= Math.sin(MathUtils.degToRad(changeToXPosition)) /100
- } else if(zInBounds){
+  } else if(zInBounds){
      dog.scene.position.z -= Math.cos(MathUtils.degToRad(changeToZPosition)) /100
- } else {
+  } else {
    dog.scene.position.x = 0
    dog.scene.position.z = 0
- }
-worldiceBurgs.forEach(iceBurg => iceBurgCollision(iceBurg))
-Allbones.forEach(bone => boneCollision(bone))
+  }
+  worldiceBurgs.forEach(iceBurg => iceBurgCollision(iceBurg))
+  Allbones.forEach(bone => boneCollision(bone))
 }

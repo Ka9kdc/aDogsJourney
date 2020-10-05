@@ -15,9 +15,11 @@ export const loadModels =() => {
     }
   )
 
-  loader.load('/DogBone.glb', function(glft){ 
+  loader.load('/DogBone.glb', 
+    function(glft){ 
       makeBones(glft)
-    } , undefined,
+    }, 
+    undefined,
     function (error) {
       console.error(error)
     })
