@@ -22,3 +22,4 @@ startPage.addEventListener('click', () => {
 document.getElementById('End').addEventListener('click', () => {
   document.getElementById('app').replaceChild(startPage, renderer.domElement)
 })
+

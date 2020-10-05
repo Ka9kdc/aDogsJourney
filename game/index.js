@@ -13,6 +13,7 @@ import { setLighting } from './lighting'
 import { makeWorldiceBurgs} from './iceBurg'
 import { makeBones} from './dogbone'
 import { resetScore } from './collisionLogic'
+import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
 
   
   //dog.scenehas 4 actions 1:jump, 2:walk; 3:walkslow 4: die
@@ -38,6 +39,9 @@ renderer.setClearColor(0xfffafa, 1)
 renderer.setSize(window.innerWidth, window.innerHeight)
 
 
+const orbitControls = new OrbitControls(camera, renderer.domElement)
+// orbitControls.addEventListener('change',  renderer.render(scene, camera))
+orbitControls.enableZoom = false
   
 export const mixers = []
 const loader = new GLTFLoader()
@@ -89,6 +93,8 @@ const render = () => {
   } else if(theta < 184 ){
     theta +=.1
     camera.position.y += .1 
+  } else if(theta < 184.1){
+    orbitControls.update()
   }
 
      
@@ -112,7 +118,6 @@ const render = () => {
 export const init = () => {
   scene = new Scene()
   scene.fog = new FogExp2(0xf0fff0, 0.14)
- console.log('bye')
   setLighting()
   makeGround()
   loadModels()

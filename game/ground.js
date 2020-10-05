@@ -5,12 +5,12 @@ import { scene } from "."
 export const makeGround = () => {
  const size = 20
  const division = 20
-//  const groundGeo = new PlaneGeometry(size,division)
-//  const groundMaterial = new MeshStandardMaterial({color: 'green'})
-//  const ground = new Mesh(groundGeo, groundMaterial)
-//  ground.rotation.x = Math.PI/2
+ const groundGeo = new PlaneGeometry(1,1)
+ const groundMaterial = new MeshStandardMaterial({color: 'green'})
+ const ground = new Mesh(groundGeo, groundMaterial)
+ ground.rotation.x = 1
 // console.log(ground)
-//  scene.add(ground)
+ scene.add(ground)
  const gridHelper = new GridHelper(size, division)
 
  scene.add(gridHelper)
