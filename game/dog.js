@@ -3,8 +3,7 @@ import {AnimationMixer, LoopOnce, MathUtils} from 'three'
 import {changeToXPosition, changeToZPosition} from './helperFunction'
 import { worldiceBurgs } from './iceBurg';
 import { boneCollision, iceBurgCollision, iceBurgHit } from './collisionLogic';
-import {Allbones} from './dogbone'
-import { spotlight } from './lighting';
+import {Allbones} from './index'
 
 //dog.scenehas 4 actions 1:jump, 2:walk; 3:walkslow 4: die
 
@@ -46,7 +45,6 @@ export function prepDog(gltf) {
     isTurningLeft: false,
   }
   scene.add(dog.scene)
-  spotlight.target = dog.scene
 }
 
 export const dogMovement = () => {

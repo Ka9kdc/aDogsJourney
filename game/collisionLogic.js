@@ -34,7 +34,7 @@ export const boneCollision = (bone) => {
         bone.position.y = Math.random() + .5
         bone.position.z = Math.random() *20 -10
         bone.rotation.x = Math.PI / Math.random()*10
-        core += 20
+        score += 20
         scoreBoard.innerText = score
         if(score > 100 && score%100 < 2){
             addMoreiceBurgs()

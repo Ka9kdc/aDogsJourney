@@ -111,6 +111,7 @@ export const init = () => {
   
 
 export const vrInit = () => {
+  console.log('vrmode')
   scene = new Scene()
   scene.fog = new FogExp2(0xf0fff0, 0.14)
   scene.background= new Color(0xa0a0a0)
