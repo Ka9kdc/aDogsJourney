@@ -1,0 +1,30 @@
+language: node_js
+node_js:
+  - 12 # uses version 12
+services:
+  - postgresql # starts up postgres
+addons:
+  postgresql: '10' # recent postgres version on Travis
+dist: xenial # uses xenial environment
+notifications:
+  email:
+    on_success: change # default: change (only when going from broken to fixed)
+    on_failure: always # default: always (which is annoying, as it should be)
+install:
+  - npm ci # faster, goes only from package-lock
+before_script:
+  - psql -c 'create database "boilermaker-test";' -U postgres # remember to change this name if you change it elsewhere (e.g. package.json)
+script:
+  - npm test # test the code
+  - npm run build-client # make the bundle
+before_deploy: # omit node_modules, since we set skip_cleanup below
+  - rm -rf node_modules
+deploy: # see README for details on these keys
+  # prevents travis from deleting the build
+  skip_cleanup: true
+  provider: heroku
+  # app should be your heroku app name; see README
+  app: bros-apothecary
+  # the secure key indicates an encrypted value; see README
+  api_key:
+    secure: YxcG187I9R7gl6jEEzzA+1/bchb7N2Z52UViygU+j0hjoYZ2k6EAG13b2+z6iUR8vrfBS1SgrGgOjCzx53HAHJxTvNfzsVgTAqYYZqpm9ROHdojLxeMnehJuoTUg6+b35ZokqBvRzvXcKjYUK16fXZe3HHU/zRB3+1ZF7+f77qfEIV5u28pzAN6teUnNCOVdwRVdcdrjdn9V13/ryRkgvws5XKtLkDxkS/5Yo5S65x+HiqaWYcYaxYYVLMOKYVocfbTn9YQ7Bg4wTLP3DieA7sPWonPdbHXkghuqFutmPWIR/oyS1hVNVOW8CTGdZBhdr6eLOPNFhkPnhzhcjnLts7/h6QoJNEywCOMlaEwhxYosVnqZeZLwnHnr6IlcxOXvUCTgEXosg+lB8+kzAqnLYiOXZgbHm3x4mYrK7UJzZg36Cp3fJmheNgfqPUMlyr7v5pWzpYsexOcvwkKoVrCNpn/qi4tqr5oIHWgZz9kY3SeWJk8xekKYPlLXBaTL8ZfOKee7HBQ9aZ0TGu0gND0BqWvkGpL1Ol1Nv8ZSJhr5t65LGgghPim9iCkbGTjkm+t4ktYkQTbAkF9wPeyovB30X+9aelcLZU3sRKNDaQRlMxn2g7yMEoo1EEzVDojoVkiyFTbuO6jLWbUrtAKtT1ri6eX1lnw4Yw/e7b3Je4+y2ho=

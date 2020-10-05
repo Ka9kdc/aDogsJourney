@@ -8,30 +8,11 @@
     "heroku-token": "script/encrypt-heroku-auth-token.js",
     "start": "node server",
     "start-dev": "NODE_ENV='development' npm run build & NODE_ENV='development' npm run start-server",
-    "start-server": "nodemon server -e html,js,scss --ignore public --ignore client",
+    "start-server": "nodemon server -e html,js,scss --ignore public --ignore game",
     "build": "webpack -w",
-    "lint": "eslint ./ --ignore-path .gitignore",
-    "lint-fix": "npm run lint -- --fix",
-    "prettify": "prettier --write \"**/*.{js,jsx,json,css,scss,md}\"",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
-  },
-  "lint-staged": {
-    "*.{js,jsx}": [
-      "prettier --write",
-      "npm run lint-fix",
-      "git add"
-    ],
-    "*.{css,scss,json,md}": [
-      "prettier --write",
-      "git add"
-    ]
-  },
-  "author": "",
+  "author": "Kelsey",
   "license": "ISC",
   "dependencies": {
     "express": "^4.17.1",
@@ -42,13 +23,6 @@
     "@babel/preset-env": "^7.11.5",
     "babel-eslint": "^10.1.0",
     "babel-loader": "^8.1.0",
-    "eslint": "^7.10.0",
-    "eslint-config-fullstack": "^6.0.0",
-    "eslint-config-prettier": "^6.12.0",
-    "eslint-plugin-react": "^7.21.3",
-    "husky": "^4.3.0",
-    "lint-staged": "^10.4.0",
-    "prettier": "^2.1.2",
     "webpack": "^4.44.2",
     "webpack-cli": "^3.3.12"
   }
