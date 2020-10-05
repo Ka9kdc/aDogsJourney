@@ -3,13 +3,13 @@ import {
     PerspectiveCamera,
     WebGLRenderer,
     Clock,
-    FogExp2, MathUtils
+    FogExp2, MathUtils, Color
   } from 'three'
 import {GLTFLoader} from 'three/examples/jsm/loaders/GLTFLoader.js'
 import './eventListners'
 import { makeGround } from './ground'
 import {prepDog, dog, positionChange} from './dog'
-import { setLighting } from './lighting'
+import { setLighting} from './lighting'
 import { makeWorldiceBurgs} from './iceBurg'
 import { makeBones} from './dogbone'
 import { resetScore } from './collisionLogic'
@@ -68,19 +68,19 @@ const loadModels =() => {
 
 let theta;
 
- const paning = () => {
-  theta +=.1
-  if(camera.position.y > .001 || camera.position.y < -.001 || camera.position.z === 5 ){
+function paning() {
+  theta += .1
+  if (camera.position.y > .001 || camera.position.y < -.001 || camera.position.z === 5) {
     camera.position.x = 5 * Math.sin(MathUtils.degToRad(theta))
     camera.position.y = Math.sin(MathUtils.degToRad(theta))
     camera.position.z = 5 * Math.cos(MathUtils.degToRad(theta))
   } else {
     camera.position.z = 5
-    if(dog){
-      dog.scene.rotation.y = Math.PI 
-    }  
+    if (dog) {
+      dog.scene.rotation.y = Math.PI
+    }
   }
-    
+
 }
  
 
@@ -118,6 +118,7 @@ const render = () => {
 export const init = () => {
   scene = new Scene()
   scene.fog = new FogExp2(0xf0fff0, 0.14)
+  scene.background= new Color(0xa0a0a0)
   setLighting()
   makeGround()
   loadModels()
