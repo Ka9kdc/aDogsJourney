@@ -10,7 +10,6 @@ window.addEventListener('resize', () => {
 window.addEventListener('keydown', checkKey)
 
 document.getElementById('reset').addEventListener('click', () => {
-  console.log('hello')
   init()
 })
 
@@ -21,6 +20,5 @@ startPage.addEventListener('click', () => {
 })
 
 document.getElementById('End').addEventListener('click', () => {
-  console.log('bye')
   document.getElementById('app').replaceChild(startPage, renderer.domElement)
 })

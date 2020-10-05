@@ -34,16 +34,14 @@ export const makeWorldiceBurgs = () =>{
     worldiceBurgs.forEach(iceBurg => scene.add(iceBurg) )
 }
 
-// export const addMoreiceBurgs = () =>{
-//     const newiceBurg = makeAiceBurg()    
-//     newiceBurg.position.y = 1
-//     newiceBurg.position.x = Math.random() * 20 -10
-//     console.log(newiceBurg.position.x)
-//     if(newiceBurg.position.x > .5  || newiceBurg.position.x < -.5){
-//         worldiceBurgs.push(newiceBurg)
-//         scene.add(newiceBurg) 
-//     }
-// }
+export const addMoreiceBurgs = () =>{
+    const newiceBurg = makeAiceBurg()    
+    newiceBurg.position.z = Math.random() * 20 -10
+    newiceBurg.position.x = Math.random() * 20 -10
+    worldiceBurgs.push(newiceBurg)
+    scene.add(newiceBurg) 
+    
+}
 
 
  

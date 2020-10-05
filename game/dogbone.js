@@ -1,8 +1,5 @@
 import { scene } from "."
 
-
-
-
 export const Allbones = []
 
 export const makeBones = (gltf) => {

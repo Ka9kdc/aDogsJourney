@@ -1,11 +1,12 @@
 
 import {dog, dogMovement} from './dog'
+import { addMoreiceBurgs } from './iceBurg';
 
 const scoreBoard = document.getElementById('score')
 let score = 0
 export let iceBurgHit;
 
-//iceBurgTrunks have a radius of .1
+//iceBurgs have a radius of .1
 
 export const iceBurgCollision = (iceBurg) => {
     const xPosition = iceBurg.position.x - dog.scene.position.x
@@ -29,13 +30,15 @@ export const boneCollision = (bone) => {
     const xPosition = bone.position.x - dog.scene.position.x
     const zPosition = bone.position.z - dog.scene.position.z
     if(xPosition < .4 && xPosition > -.4 && zPosition < .4 && zPosition > -.4){
-        console.log('hit') 
     bone.position.x = Math.random() *20 -10
     bone.position.y = Math.random() + .5
     bone.position.z = Math.random() *20 -10
     bone.rotation.x = Math.PI / Math.random()*10
      score += 20
     scoreBoard.innerText = score
+    if(score > 100 && score%100 < 2){
+        addMoreiceBurgs()
+    }
     }
    
 }

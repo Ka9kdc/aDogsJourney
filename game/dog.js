@@ -62,7 +62,7 @@ export const dogMovement = () => {
   } else if(actions.isJumping){
     mixers[0].actions[2].enabled = true
     
-    mixers[0].mixer.addEventListener( 'finished', function( e ) {
+    mixers[0].mixer.addEventListener( 'finished', function() {
       if(actions.isWalking === 0) actions.isWalking = true
       actions.isJumping = false
       dog.scene.position.y = 0
@@ -70,7 +70,7 @@ export const dogMovement = () => {
     } ); // properties of e: type, action and direction
   } else if(actions.hasDied){
     mixers[0].actions[0].enabled = true
-    mixers[0].mixer.addEventListener( 'finished', function( e ) {
+    mixers[0].mixer.addEventListener( 'finished', function() {
       console.log("died")
       iceBurgHit.position.z = Math.random() * 20 -10
       iceBurgHit.position.x = Math.random() * 20 -10
