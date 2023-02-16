@@ -41,7 +41,7 @@ import { makeBones, moveBones } from './dogbone'
   export const mixers = []
   const loader = new GLTFLoader()
   loader.load(
-    '/Pug.gltf',
+    './Pug.gltf',
     function (gltf) {
       prepDog(gltf)      
     },
@@ -51,7 +51,7 @@ import { makeBones, moveBones } from './dogbone'
     }
   )
 
- loader.load('/DogBone.glb', function(glft){ makeBones(glft)} , undefined,
+ loader.load('./DogBone.glb', function(glft){ makeBones(glft)} , undefined,
  function (error) {
    console.error(error)
  })
